@@ -54,6 +54,57 @@
       </span>
     </div>
 
+    <!-- Preguntas Sí / No -->
+    <div class="yes-no-questions">
+      <div class="question-card">
+        <span class="question-text">¿El personal resolvió tus dudas?</span>
+        <div class="question-options">
+          <button
+            class="option-btn"
+            [class.selected]="answeredQuestions.resolvioDudas === true"
+            (click)="answerQuestion('resolvioDudas', true)"
+            matRipple
+          >
+            <mat-icon class="option-icon">thumb_up</mat-icon>
+            Sí
+          </button>
+          <button
+            class="option-btn option-no"
+            [class.selected]="answeredQuestions.resolvioDudas === false"
+            (click)="answerQuestion('resolvioDudas', false)"
+            matRipple
+          >
+            <mat-icon class="option-icon">thumb_down</mat-icon>
+            No
+          </button>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <span class="question-text">¿El tiempo de espera fue aceptable?</span>
+        <div class="question-options">
+          <button
+            class="option-btn"
+            [class.selected]="answeredQuestions.tiempoEspera === true"
+            (click)="answerQuestion('tiempoEspera', true)"
+            matRipple
+          >
+            <mat-icon class="option-icon">thumb_up</mat-icon>
+            Sí
+          </button>
+          <button
+            class="option-btn option-no"
+            [class.selected]="answeredQuestions.tiempoEspera === false"
+            (click)="answerQuestion('tiempoEspera', false)"
+            matRipple
+          >
+            <mat-icon class="option-icon">thumb_down</mat-icon>
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Campo de comentarios opcional -->
     <div class="rating-comment-section">
       <label class="comment-label">

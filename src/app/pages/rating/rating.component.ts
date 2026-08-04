@@ -15,6 +15,11 @@ export class RatingComponent implements OnInit {
   comment: string = '';
   selectedAreaName: string = '';
 
+  answeredQuestions: { resolvioDudas: boolean | null; tiempoEspera: boolean | null } = {
+    resolvioDudas: null,
+    tiempoEspera: null
+  };
+
   private ratingLabels: { [key: number]: string } = {
     1: 'Muy mala',
     2: 'Mala',
@@ -56,11 +61,17 @@ export class RatingComponent implements OnInit {
     return this.ratingLabels[rating] || '';
   }
 
+  answerQuestion(question: 'resolvioDudas' | 'tiempoEspera', value: boolean): void {
+    this.answeredQuestions[question] = value;
+  }
+
   onEnviar(): void {
     if (this.selectedRating > 0) {
       const data = {
         area: this.selectedAreaName,
         rating: this.selectedRating,
+        resolvioDudas: this.answeredQuestions.resolvioDudas,
+        tiempoEspera: this.answeredQuestions.tiempoEspera,
         comment: this.comment.trim() || null
       };
       console.log('Calificación enviada:', data);
