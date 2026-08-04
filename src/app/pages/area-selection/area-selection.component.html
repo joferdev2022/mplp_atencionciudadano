@@ -1,0 +1,52 @@
+<div class="area-container">
+  <!-- Botón volver -->
+  <button class="back-button" (click)="goBack()" matRipple aria-label="Volver">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <!-- Header con logo centrado -->
+  <header class="area-header">
+    <div class="header-logo-wrapper">
+      <img
+        src="assets/logo_municipalidad.jpg"
+        alt="Escudo Municipalidad Provincial de Leoncio Prado"
+        class="header-logo"
+      />
+    </div>
+    <span class="header-municipality-name">Municipalidad Provincial Leoncio Prado</span>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="area-main">
+    <h1 class="area-title">
+      Selecciona el área que<br />atendió tu solicitud
+    </h1>
+
+    <!-- Lista de áreas -->
+    <div class="area-list">
+      <button
+        *ngFor="let area of areas"
+        class="area-option"
+        [class.selected]="selectedArea === area"
+        (click)="selectArea(area)"
+        matRipple
+      >
+        <span class="area-option-text">{{ area.nombre }}</span>
+        <mat-icon class="area-check-icon" *ngIf="selectedArea === area">check_circle</mat-icon>
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer con botón Siguiente -->
+  <footer class="area-footer">
+    <button
+      mat-raised-button
+      class="area-btn-next"
+      [disabled]="!selectedArea"
+      (click)="onSiguiente()"
+      matRipple
+    >
+      Siguiente
+    </button>
+  </footer>
+</div>

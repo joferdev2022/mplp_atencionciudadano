@@ -1,0 +1,88 @@
+<div class="rating-container">
+  <!-- Botón volver -->
+  <button class="back-button" (click)="goBack()" matRipple aria-label="Volver">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <!-- Header con logo centrado -->
+  <header class="rating-header">
+    <div class="header-logo-wrapper">
+      <img
+        src="assets/logo_municipalidad.jpg"
+        alt="Escudo Municipalidad Provincial de Leoncio Prado"
+        class="header-logo"
+      />
+    </div>
+    <span class="header-municipality-name">Municipalidad Provincial Leoncio Prado</span>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="rating-main">
+    <h1 class="rating-title">
+      ¿Cómo calificarías la<br />atención recibida?
+    </h1>
+
+    <!-- Área seleccionada -->
+    <div class="rating-area-badge" *ngIf="selectedAreaName">
+      <mat-icon class="badge-icon">business</mat-icon>
+      <span>{{ selectedAreaName }}</span>
+    </div>
+
+    <!-- Estrellas de calificación -->
+    <div class="rating-stars-section">
+      <div class="stars-container">
+        <button
+          *ngFor="let star of stars"
+          class="star-btn"
+          [class.active]="star <= selectedRating"
+          [class.hover]="star <= hoveredRating && hoveredRating > 0"
+          (click)="selectRating(star)"
+          (mouseenter)="onStarHover(star)"
+          (mouseleave)="onStarLeave()"
+          (touchstart)="selectRating(star)"
+          [attr.aria-label]="star + ' estrella' + (star > 1 ? 's' : '')"
+        >
+          <mat-icon class="star-icon">
+            {{ star <= (hoveredRating || selectedRating) ? 'star' : 'star_border' }}
+          </mat-icon>
+        </button>
+      </div>
+
+      <!-- Etiqueta de calificación -->
+      <span class="rating-label" [class.visible]="selectedRating > 0">
+        {{ getRatingLabel() }}
+      </span>
+    </div>
+
+    <!-- Campo de comentarios opcional -->
+    <div class="rating-comment-section">
+      <label class="comment-label">
+        Comentarios adicionales
+        <span class="comment-optional">(opcional)</span>
+      </label>
+      <div class="comment-field-wrapper">
+        <textarea
+          class="comment-textarea"
+          [(ngModel)]="comment"
+          placeholder="Cuéntanos más sobre tu experiencia..."
+          rows="4"
+          maxlength="500"
+        ></textarea>
+        <span class="comment-counter">{{ comment.length }}/500</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer con botón Enviar -->
+  <footer class="rating-footer">
+    <button
+      mat-raised-button
+      class="rating-btn-submit"
+      [disabled]="selectedRating === 0"
+      (click)="onEnviar()"
+      matRipple
+    >
+      Enviar calificación
+    </button>
+  </footer>
+</div>

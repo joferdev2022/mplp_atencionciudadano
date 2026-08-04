@@ -1,0 +1,419 @@
+// ============================================
+// Variables de diseño
+// ============================================
+$color-primary: #1B5E20;
+$color-primary-light: #2E7D32;
+$color-white: #ffffff;
+$color-text-dark: #1a1a1a;
+$color-text-secondary: #555555;
+$color-text-muted: #388E3C;
+$color-success-bg: #E8F5E9;
+$color-border-light: #E0E0E0;
+
+// ============================================
+// Host & Container
+// ============================================
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.confirmation-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: $color-white;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// ============================================
+// Header
+// ============================================
+.confirmation-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 24px 12px;
+  flex-shrink: 0;
+  animation: fadeIn 0.5s ease-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 50%, $color-primary 100%);
+  }
+}
+
+.header-logo-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba($color-primary, 0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+  background-color: $color-white;
+}
+
+.header-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-municipality-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+// ============================================
+// Main content
+// ============================================
+.confirmation-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 24px 16px;
+}
+
+// ============================================
+// Ícono de éxito
+// ============================================
+.success-icon-wrapper {
+  margin-bottom: 24px;
+  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.success-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba($color-primary, 0.3);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 2px solid rgba($color-primary, 0.15);
+    animation: pulseRing 2s ease-out infinite;
+  }
+}
+
+.success-icon {
+  font-size: 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  color: $color-white;
+}
+
+// ============================================
+// Textos
+// ============================================
+.confirmation-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: $color-text-dark;
+  text-align: center;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.3px;
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.confirmation-message {
+  font-size: 1rem;
+  font-weight: 400;
+  color: $color-text-secondary;
+  text-align: center;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+  animation: fadeInUp 0.5s ease-out 0.5s both;
+}
+
+// ============================================
+// Código de seguimiento
+// ============================================
+.tracking-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  animation: fadeInUp 0.5s ease-out 0.6s both;
+}
+
+.tracking-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.tracking-code-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: $color-success-bg;
+  border: 2px solid rgba($color-primary, 0.2);
+  border-radius: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.tracking-code {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: $color-primary;
+  letter-spacing: 1.5px;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.1);
+  }
+
+  &:active {
+    background-color: rgba($color-primary, 0.2);
+  }
+}
+
+.copy-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: $color-primary;
+}
+
+.tracking-hint {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #999;
+  text-align: center;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+// ============================================
+// Footer / Botón Volver
+// ============================================
+.confirmation-footer {
+  padding: 20px 24px 32px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  animation: fadeInUp 0.5s ease-out 0.7s both;
+}
+
+.confirmation-btn {
+  width: 100%;
+  max-width: 340px;
+  height: 54px;
+  border-radius: 50px !important;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%) !important;
+  color: $color-white !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  text-transform: none !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba($color-primary, 0.35) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba($color-primary, 0.5) !important;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba($color-primary, 0.3) !important;
+  }
+}
+
+// ============================================
+// Animaciones
+// ============================================
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+// ============================================
+// Responsive - Pantallas muy pequeñas
+// ============================================
+@media (max-width: 360px) {
+  .confirmation-header {
+    padding: 22px 18px 8px;
+  }
+
+  .header-logo-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header-municipality-name {
+    font-size: 0.78rem;
+  }
+
+  .success-circle {
+    width: 76px;
+    height: 76px;
+
+    &::after {
+      width: 94px;
+      height: 94px;
+    }
+  }
+
+  .success-icon {
+    font-size: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .confirmation-title {
+    font-size: 1.4rem;
+  }
+
+  .confirmation-message {
+    font-size: 0.9rem;
+  }
+
+  .tracking-code {
+    font-size: 1.1rem;
+  }
+
+  .confirmation-btn {
+    height: 48px;
+    font-size: 1rem !important;
+  }
+}
+
+// ============================================
+// Responsive - Tablets y Desktop
+// ============================================
+@media (min-width: 600px) {
+  .confirmation-header {
+    padding: 36px 32px 16px;
+  }
+
+  .header-logo-wrapper {
+    width: 84px;
+    height: 84px;
+  }
+
+  .header-municipality-name {
+    font-size: 0.95rem;
+  }
+
+  .success-circle {
+    width: 100px;
+    height: 100px;
+
+    &::after {
+      width: 124px;
+      height: 124px;
+    }
+  }
+
+  .success-icon {
+    font-size: 54px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .confirmation-title {
+    font-size: 2rem;
+  }
+
+  .confirmation-message {
+    font-size: 1.1rem;
+  }
+
+  .tracking-code {
+    font-size: 1.5rem;
+  }
+
+  .confirmation-btn {
+    max-width: 380px;
+    height: 58px;
+    font-size: 1.15rem !important;
+  }
+}
+
+// Safe area
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .confirmation-footer {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}

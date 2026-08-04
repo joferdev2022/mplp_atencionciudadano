@@ -1,0 +1,47 @@
+<div class="welcome-container">
+  <!-- Header con logo y nombre de la municipalidad -->
+  <header class="welcome-header">
+    <div class="header-content">
+      <img
+        src="assets/logo_municipalidad.jpg"
+        alt="Escudo Municipalidad Provincial de Leoncio Prado"
+        class="header-logo"
+      />
+      <div class="header-text">
+        <span class="header-title">Municipalidad Provincial</span>
+        <span class="header-subtitle">LEONCIO PRADO</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="welcome-main">
+    <div class="welcome-content">
+      <h1 class="welcome-question">
+        ¿Cómo fue tu<br />experiencia hoy?
+      </h1>
+      <p class="welcome-description">Tu opinión nos ayuda a mejorar</p>
+    </div>
+
+    <!-- Ilustración -->
+    <div class="welcome-illustration">
+      <img
+        src="assets/citizens_illustration.jpg"
+        alt="Ilustración de ciudadanos en la ciudad"
+        class="illustration-image"
+      />
+    </div>
+  </main>
+
+  <!-- Botón de acción -->
+  <footer class="welcome-footer">
+    <button
+      mat-raised-button
+      class="welcome-btn"
+      (click)="onComenzar()"
+      matRipple
+    >
+      Comenzar
+    </button>
+  </footer>
+</div>

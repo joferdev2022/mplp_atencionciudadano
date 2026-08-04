@@ -1,0 +1,283 @@
+// ============================================
+// Variables de diseño
+// ============================================
+$color-primary: #1B5E20;
+$color-primary-dark: #0D3B0F;
+$color-primary-light: #2E7D32;
+$color-white: #ffffff;
+$color-bg: #FAFAFA;
+$color-text-dark: #1a1a1a;
+$color-text-secondary: #555555;
+
+$header-height: 72px;
+$border-radius-btn: 50px;
+$max-width-mobile: 480px;
+$max-width-tablet: 768px;
+
+// ============================================
+// Host & Container
+// ============================================
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: $color-white;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// ============================================
+// Header
+// ============================================
+.welcome-header {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  padding: 16px 20px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+  background-color: $color-white;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.header-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: $color-white;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+}
+
+.header-subtitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: $color-white;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+// ============================================
+// Main content
+// ============================================
+.welcome-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 24px 16px;
+  overflow: hidden;
+}
+
+.welcome-content {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.welcome-question {
+  font-size: 2rem;
+  font-weight: 800;
+  color: $color-text-dark;
+  line-height: 1.15;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.welcome-description {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: $color-text-secondary;
+  margin: 0;
+  line-height: 1.5;
+}
+
+// ============================================
+// Ilustración
+// ============================================
+.welcome-illustration {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.illustration-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+// ============================================
+// Footer / Botón
+// ============================================
+.welcome-footer {
+  padding: 20px 24px 32px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.welcome-btn {
+  width: 100%;
+  max-width: 340px;
+  height: 54px;
+  border-radius: $border-radius-btn !important;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%) !important;
+  color: $color-white !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  text-transform: none !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba($color-primary, 0.35) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba($color-primary, 0.5) !important;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba($color-primary, 0.3) !important;
+  }
+}
+
+// ============================================
+// Animaciones
+// ============================================
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ============================================
+// Responsive - Pantallas muy pequeñas
+// ============================================
+@media (max-width: 360px) {
+  .welcome-question {
+    font-size: 1.65rem;
+  }
+
+  .welcome-description {
+    font-size: 0.95rem;
+  }
+
+  .header-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .header-title {
+    font-size: 0.9rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .welcome-main {
+    padding: 24px 18px 12px;
+  }
+
+  .welcome-btn {
+    height: 48px;
+    font-size: 1rem !important;
+  }
+}
+
+// ============================================
+// Responsive - Tablets y Desktop
+// ============================================
+@media (min-width: 600px) {
+  .welcome-header {
+    padding: 20px 32px;
+  }
+
+  .header-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header-title {
+    font-size: 1.15rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.4rem;
+  }
+
+  .welcome-question {
+    font-size: 2.5rem;
+  }
+
+  .welcome-description {
+    font-size: 1.15rem;
+  }
+
+  .welcome-illustration {
+    max-width: 440px;
+  }
+
+  .welcome-btn {
+    max-width: 380px;
+    height: 58px;
+    font-size: 1.15rem !important;
+  }
+}
+
+// Safe area para iPhones con notch
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .welcome-footer {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}

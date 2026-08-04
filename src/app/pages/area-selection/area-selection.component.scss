@@ -1,0 +1,374 @@
+// ============================================
+// Variables de diseño
+// ============================================
+$color-primary: #1B5E20;
+$color-primary-dark: #0D3B0F;
+$color-primary-light: #2E7D32;
+$color-white: #ffffff;
+$color-bg-option: #F2F2F2;
+$color-bg-option-hover: #E8E8E8;
+$color-border-selected: #1B5E20;
+$color-text-dark: #1a1a1a;
+$color-text-secondary: #555555;
+$color-text-muted: #388E3C;
+
+// ============================================
+// Host & Container
+// ============================================
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.area-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: $color-white;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// ============================================
+// Botón volver
+// ============================================
+.back-button {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  z-index: 10;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-dark;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    transform: scale(0.9);
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// ============================================
+// Header
+// ============================================
+.area-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 24px 12px;
+  flex-shrink: 0;
+  animation: fadeIn 0.5s ease-out;
+
+  // Línea decorativa verde en la parte superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 50%, $color-primary 100%);
+  }
+}
+
+.header-logo-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba($color-primary, 0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 8px;
+  flex-shrink: 0;
+  background-color: $color-white;
+}
+
+.header-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-municipality-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $color-text-muted;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+// ============================================
+// Main content
+// ============================================
+.area-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 8px;
+  overflow-y: auto;
+}
+
+.area-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: $color-text-dark;
+  line-height: 1.2;
+  margin: 0 0 24px 0;
+  text-align: center;
+  letter-spacing: -0.3px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+// ============================================
+// Lista de áreas
+// ============================================
+.area-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeInUp 0.5s ease-out 0.15s both;
+}
+
+.area-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 20px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-color: $color-bg-option;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+  font-family: 'Inter', 'Roboto', sans-serif;
+
+  &:hover {
+    background-color: $color-bg-option-hover;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  // Estado seleccionado
+  &.selected {
+    border-color: $color-border-selected;
+    background-color: rgba($color-primary, 0.06);
+    box-shadow: 0 2px 12px rgba($color-primary, 0.12);
+
+    .area-option-text {
+      color: $color-primary;
+      font-weight: 700;
+    }
+  }
+}
+
+.area-option-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: $color-text-dark;
+  text-align: center;
+  line-height: 1.3;
+  transition: color 0.25s ease, font-weight 0.25s ease;
+}
+
+.area-check-icon {
+  position: absolute;
+  right: 16px;
+  color: $color-primary;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+// ============================================
+// Footer / Botón Siguiente
+// ============================================
+.area-footer {
+  padding: 20px 24px 32px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+.area-btn-next {
+  width: 100%;
+  max-width: 340px;
+  height: 54px;
+  border-radius: 50px !important;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%) !important;
+  color: $color-white !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  text-transform: none !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba($color-primary, 0.35) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 6px 24px rgba($color-primary, 0.5) !important;
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba($color-primary, 0.3) !important;
+  }
+
+  &:disabled {
+    background: linear-gradient(135deg, #9E9E9E 0%, #BDBDBD 100%) !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+// ============================================
+// Animaciones
+// ============================================
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ============================================
+// Responsive - Pantallas muy pequeñas
+// ============================================
+@media (max-width: 360px) {
+  .area-header {
+    padding: 22px 18px 8px;
+  }
+
+  .header-logo-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header-municipality-name {
+    font-size: 0.78rem;
+  }
+
+  .area-title {
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+  }
+
+  .area-main {
+    padding: 12px 18px 8px;
+  }
+
+  .area-list {
+    gap: 10px;
+  }
+
+  .area-option {
+    min-height: 50px;
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+
+  .area-option-text {
+    font-size: 0.95rem;
+  }
+
+  .area-btn-next {
+    height: 48px;
+    font-size: 1rem !important;
+  }
+}
+
+// ============================================
+// Responsive - Tablets y Desktop
+// ============================================
+@media (min-width: 600px) {
+  .area-header {
+    padding: 36px 32px 16px;
+  }
+
+  .header-logo-wrapper {
+    width: 84px;
+    height: 84px;
+  }
+
+  .header-municipality-name {
+    font-size: 0.95rem;
+  }
+
+  .area-title {
+    font-size: 1.8rem;
+  }
+
+  .area-option {
+    min-height: 60px;
+    padding: 16px 24px;
+  }
+
+  .area-option-text {
+    font-size: 1.15rem;
+  }
+
+  .area-btn-next {
+    max-width: 380px;
+    height: 58px;
+    font-size: 1.15rem !important;
+  }
+}
+
+// Safe area para iPhones con notch
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .area-footer {
+    padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}
