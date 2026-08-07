@@ -7,8 +7,6 @@ $color-white: #ffffff;
 $color-text-dark: #1a1a1a;
 $color-text-secondary: #555555;
 $color-text-muted: #388E3C;
-$color-success-bg: #E8F5E9;
-$color-border-light: #E0E0E0;
 
 // ============================================
 // Host & Container
@@ -92,43 +90,6 @@ $color-border-light: #E0E0E0;
 }
 
 // ============================================
-// Ícono de éxito
-// ============================================
-.success-icon-wrapper {
-  margin-bottom: 24px;
-  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
-}
-
-.success-circle {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 24px rgba($color-primary, 0.3);
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 2px solid rgba($color-primary, 0.15);
-    animation: pulseRing 2s ease-out infinite;
-  }
-}
-
-.success-icon {
-  font-size: 48px !important;
-  width: 48px !important;
-  height: 48px !important;
-  color: $color-white;
-}
-
-// ============================================
 // Textos
 // ============================================
 .confirmation-title {
@@ -146,87 +107,30 @@ $color-border-light: #E0E0E0;
   font-weight: 400;
   color: $color-text-secondary;
   text-align: center;
-  margin: 0 0 32px 0;
+  margin: 0;
   line-height: 1.5;
   animation: fadeInUp 0.5s ease-out 0.5s both;
 }
 
 // ============================================
-// Código de seguimiento
+// Ilustración de agradecimiento
 // ============================================
-.tracking-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  max-width: 320px;
-  animation: fadeInUp 0.5s ease-out 0.6s both;
-}
-
-.tracking-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: $color-text-secondary;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-}
-
-.tracking-code-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background-color: $color-success-bg;
-  border: 2px solid rgba($color-primary, 0.2);
-  border-radius: 12px;
-  width: 100%;
-  justify-content: center;
-}
-
-.tracking-code {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: $color-primary;
-  letter-spacing: 1.5px;
-  font-family: 'Roboto Mono', 'Courier New', monospace;
-}
-
-.copy-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
+.thanks-illustration-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-
-  &:hover {
-    background-color: rgba($color-primary, 0.1);
-  }
-
-  &:active {
-    background-color: rgba($color-primary, 0.2);
-  }
+  width: 100%;
+  margin-bottom: 24px;
+  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
 }
 
-.copy-icon {
-  font-size: 20px !important;
-  width: 20px !important;
-  height: 20px !important;
-  color: $color-primary;
-}
-
-.tracking-hint {
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: #999;
-  text-align: center;
-  line-height: 1.4;
-  font-style: italic;
+.thanks-illustration {
+  display: block;
+  width: auto;
+  height: clamp(180px, 28vh, 250px);
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12));
 }
 
 // ============================================
@@ -297,17 +201,6 @@ $color-border-light: #E0E0E0;
   }
 }
 
-@keyframes pulseRing {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(1.3);
-    opacity: 0;
-  }
-}
-
 // ============================================
 // Responsive - Pantallas muy pequeñas
 // ============================================
@@ -325,22 +218,6 @@ $color-border-light: #E0E0E0;
     font-size: 0.78rem;
   }
 
-  .success-circle {
-    width: 76px;
-    height: 76px;
-
-    &::after {
-      width: 94px;
-      height: 94px;
-    }
-  }
-
-  .success-icon {
-    font-size: 40px !important;
-    width: 40px !important;
-    height: 40px !important;
-  }
-
   .confirmation-title {
     font-size: 1.4rem;
   }
@@ -349,8 +226,8 @@ $color-border-light: #E0E0E0;
     font-size: 0.9rem;
   }
 
-  .tracking-code {
-    font-size: 1.1rem;
+  .thanks-illustration {
+    height: clamp(165px, 27vh, 205px);
   }
 
   .confirmation-btn {
@@ -376,22 +253,6 @@ $color-border-light: #E0E0E0;
     font-size: 0.95rem;
   }
 
-  .success-circle {
-    width: 100px;
-    height: 100px;
-
-    &::after {
-      width: 124px;
-      height: 124px;
-    }
-  }
-
-  .success-icon {
-    font-size: 54px !important;
-    width: 54px !important;
-    height: 54px !important;
-  }
-
   .confirmation-title {
     font-size: 2rem;
   }
@@ -400,8 +261,8 @@ $color-border-light: #E0E0E0;
     font-size: 1.1rem;
   }
 
-  .tracking-code {
-    font-size: 1.5rem;
+  .thanks-illustration {
+    height: clamp(220px, 30vh, 280px);
   }
 
   .confirmation-btn {

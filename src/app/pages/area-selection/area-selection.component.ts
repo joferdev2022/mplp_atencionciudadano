@@ -16,9 +16,10 @@ export class AreaSelectionComponent {
 
   areas: Area[] = [
     { id: 1, nombre: 'Mesa de Partes' },
-    { id: 2, nombre: 'Caja' },
-    { id: 3, nombre: 'Infraestructura' },
-    { id: 4, nombre: 'Tránsito' },
+    { id: 2, nombre: 'Rentas' },
+    { id: 3, nombre: 'Caja' },
+    { id: 4, nombre: 'Transportes' },
+    { id: 5, nombre: 'Infraestructura' },
   ];
 
   selectedArea: Area | null = null;

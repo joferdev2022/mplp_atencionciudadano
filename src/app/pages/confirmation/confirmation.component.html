@@ -13,11 +13,13 @@
 
   <!-- Contenido principal -->
   <main class="confirmation-main">
-    <!-- Ícono de éxito -->
-    <div class="success-icon-wrapper">
-      <div class="success-circle">
-        <mat-icon class="success-icon">check</mat-icon>
-      </div>
+    <!-- Ilustración de agradecimiento -->
+    <div class="thanks-illustration-wrapper">
+      <img
+        src="assets/tulumayogracias.png"
+        alt="Tulumayo agradece tu opinión"
+        class="thanks-illustration"
+      />
     </div>
 
     <h1 class="confirmation-title">¡Gracias por tu opinión!</h1>
@@ -25,23 +27,6 @@
     <p class="confirmation-message">
       Tu respuesta ha sido enviada correctamente
     </p>
-
-    <!-- Código de seguimiento -->
-    <div class="tracking-section">
-      <span class="tracking-label">Código de seguimiento</span>
-      <div class="tracking-code-wrapper">
-        <span class="tracking-code">{{ trackingCode }}</span>
-        <button
-          class="copy-btn"
-          (click)="copyCode()"
-          matRipple
-          [attr.aria-label]="'Copiar código'"
-        >
-          <mat-icon class="copy-icon">{{ copied ? 'check' : 'content_copy' }}</mat-icon>
-        </button>
-      </div>
-      <span class="tracking-hint">Guarda este código para consultar el estado de tu solicitud</span>
-    </div>
   </main>
 
   <!-- Footer con botón Volver al inicio -->

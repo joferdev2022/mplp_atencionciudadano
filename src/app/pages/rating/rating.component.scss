@@ -457,6 +457,52 @@ $color-border-light: #E0E0E0;
 }
 
 // ============================================
+// Overlay de envío
+// ============================================
+.submission-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background-color: rgba(45, 45, 45, 0.32);
+  backdrop-filter: blur(2px);
+  cursor: wait;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.submission-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 300px);
+  padding: 30px 24px 26px;
+  border-radius: 20px;
+  background-color: rgba($color-white, 0.97);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+  text-align: center;
+}
+
+.submission-spinner {
+  margin-bottom: 20px;
+  --mdc-circular-progress-active-indicator-color: #{$color-primary};
+}
+
+.submission-title {
+  margin: 0 0 6px;
+  color: $color-text-dark;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.submission-message {
+  color: $color-text-secondary;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+// ============================================
 // Animaciones
 // ============================================
 @keyframes fadeIn {
