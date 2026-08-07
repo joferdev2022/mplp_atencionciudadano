@@ -129,11 +129,23 @@
     <button
       mat-raised-button
       class="rating-btn-submit"
-      [disabled]="selectedRating === 0"
+      [class.submitting]="isSubmitting"
+      [disabled]="!isFormValid() || isSubmitting"
+      [attr.aria-busy]="isSubmitting"
       (click)="onEnviar()"
       matRipple
     >
-      Enviar calificación
+      <ng-container *ngIf="isSubmitting; else submitLabel">
+        <span class="submit-content">
+          <mat-spinner
+            class="submit-spinner"
+            [diameter]="20"
+            aria-hidden="true"
+          ></mat-spinner>
+          <span>Enviando...</span>
+        </span>
+      </ng-container>
+      <ng-template #submitLabel>Enviar calificación</ng-template>
     </button>
   </footer>
 </div>
