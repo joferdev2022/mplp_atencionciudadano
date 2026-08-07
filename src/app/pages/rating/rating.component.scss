@@ -463,20 +463,22 @@ $color-border-light: #E0E0E0;
   position: fixed;
   inset: 0;
   z-index: 1000;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   padding: 24px;
-  background-color: rgba(45, 45, 45, 0.32);
-  backdrop-filter: blur(2px);
+  background-color: rgba(45, 45, 45, 0.36);
   cursor: wait;
-  animation: fadeIn 0.2s ease-out;
 }
 
 .submission-status {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: min(100%, 300px);
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
   padding: 30px 24px 26px;
   border-radius: 20px;
   background-color: rgba($color-white, 0.97);
@@ -485,6 +487,9 @@ $color-border-light: #E0E0E0;
 }
 
 .submission-spinner {
+  width: 56px !important;
+  height: 56px !important;
+  flex: 0 0 56px;
   margin-bottom: 20px;
   --mdc-circular-progress-active-indicator-color: #{$color-primary};
 }

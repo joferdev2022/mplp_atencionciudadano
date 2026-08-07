@@ -133,7 +133,6 @@
       [disabled]="!isFormValid() || isSubmitting"
       [attr.aria-busy]="isSubmitting"
       (click)="onEnviar()"
-      matRipple
     >
       <ng-container *ngIf="isSubmitting; else submitLabel">
         <span class="submit-content">
@@ -148,13 +147,14 @@
       <ng-template #submitLabel>Enviar calificación</ng-template>
     </button>
   </footer>
+</div>
 
-  <div
-    *ngIf="isSubmitting"
-    class="submission-overlay"
-    role="status"
-    aria-live="polite"
-  >
+<div
+  *ngIf="isSubmitting"
+  class="submission-overlay"
+  role="status"
+  aria-live="polite"
+>
     <div class="submission-status">
       <mat-spinner
         class="submission-spinner"
@@ -164,5 +164,4 @@
       <p class="submission-title">Enviando tu calificación...</p>
       <span class="submission-message">Por favor, espera un momento</span>
     </div>
-  </div>
 </div>

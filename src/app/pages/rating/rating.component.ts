@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CalificacionRequest } from '../../models/calificacion-request.model';
 import { CalificacionService } from '../../services/calificacion.service';
+import { CalificacionSessionService } from '../../services/calificacion-session.service';
 
 @Component({
   selector: 'app-rating',
@@ -35,7 +36,8 @@ export class RatingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private calificacionService: CalificacionService
+    private calificacionService: CalificacionService,
+    private calificacionSession: CalificacionSessionService
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +89,8 @@ export class RatingComponent implements OnInit {
       next: () => {
         this.resetForm();
         this.isSubmitting = false;
-        this.router.navigate(['/confirmacion']);
+        this.calificacionSession.marcarComoEnviada();
+        this.router.navigate(['/confirmacion'], { replaceUrl: true });
       },
       error: error => {
         this.isSubmitting = false;

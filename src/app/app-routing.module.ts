@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CalificacionEnviadaGuard } from './guards/calificacion-enviada.guard';
 
 const routes: Routes = [
   {
@@ -13,10 +14,12 @@ const routes: Routes = [
   },
   {
     path: 'seleccion-area',
+    canActivate: [CalificacionEnviadaGuard],
     loadChildren: () => import('./pages/area-selection/area-selection.module').then(m => m.AreaSelectionModule)
   },
   {
     path: 'calificacion',
+    canActivate: [CalificacionEnviadaGuard],
     loadChildren: () => import('./pages/rating/rating.module').then(m => m.RatingModule)
   },
   {

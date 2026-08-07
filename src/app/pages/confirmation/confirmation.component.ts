@@ -11,6 +11,6 @@ export class ConfirmationComponent {
   constructor(private router: Router) {}
 
   onVolverInicio(): void {
-    this.router.navigate(['/bienvenida']);
+    this.router.navigate(['/bienvenida'], { replaceUrl: true });
   }
 }
