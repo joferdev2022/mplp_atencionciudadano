@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-confirmation',
+  standalone: false,
   templateUrl: './confirmation.component.html',
   styleUrls: ['./confirmation.component.scss']
 })

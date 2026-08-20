@@ -9,6 +9,7 @@ interface Area {
 
 @Component({
   selector: 'app-area-selection',
+  standalone: false,
   templateUrl: './area-selection.component.html',
   styleUrls: ['./area-selection.component.scss']
 })

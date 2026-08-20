@@ -7,6 +7,7 @@ import { CalificacionSessionService } from '../../services/calificacion-session.
 
 @Component({
   selector: 'app-rating',
+  standalone: false,
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.scss']
 })

@@ -4,6 +4,7 @@ import { CalificacionSessionService } from '../../services/calificacion-session.
 
 @Component({
   selector: 'app-welcome',
+  standalone: false,
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
