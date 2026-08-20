@@ -453,7 +453,7 @@ $color-border-light: #E0E0E0;
 
 .submit-spinner {
   display: inline-block;
-  --mdc-circular-progress-active-indicator-color: #{$color-white};
+  --mat-progress-spinner-active-indicator-color: #{$color-white};
 }
 
 // ============================================
@@ -491,7 +491,7 @@ $color-border-light: #E0E0E0;
   height: 56px !important;
   flex: 0 0 56px;
   margin-bottom: 20px;
-  --mdc-circular-progress-active-indicator-color: #{$color-primary};
+  --mat-progress-spinner-active-indicator-color: #{$color-primary};
 }
 
 .submission-title {
