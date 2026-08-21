@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalificacionSessionService } from '../../services/calificacion-session.service';
+import { MatButton } from '@angular/material/button';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
-  selector: 'app-welcome',
-  standalone: false,
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+    selector: 'app-welcome',
+    templateUrl: './welcome.component.html',
+    styleUrls: ['./welcome.component.scss'],
+    imports: [MatButton, MatRipple]
 })
 export class WelcomeComponent {
 

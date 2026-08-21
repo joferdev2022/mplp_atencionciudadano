@@ -6,14 +6,12 @@ import { RatingComponent } from './rating.component';
 import { MaterialModule } from '../../shared/material.module';
 
 @NgModule({
-  declarations: [
-    RatingComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RatingRoutingModule,
-    MaterialModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        RatingRoutingModule,
+        MaterialModule,
+        RatingComponent
+    ]
 })
 export class RatingModule { }

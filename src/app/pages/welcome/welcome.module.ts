@@ -5,13 +5,11 @@ import { WelcomeComponent } from './welcome.component';
 import { MaterialModule } from '../../shared/material.module';
 
 @NgModule({
-  declarations: [
-    WelcomeComponent
-  ],
-  imports: [
-    CommonModule,
-    WelcomeRoutingModule,
-    MaterialModule
-  ]
+    imports: [
+        CommonModule,
+        WelcomeRoutingModule,
+        MaterialModule,
+        WelcomeComponent
+    ]
 })
 export class WelcomeModule { }

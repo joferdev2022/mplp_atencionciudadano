@@ -5,13 +5,11 @@ import { AreaSelectionComponent } from './area-selection.component';
 import { MaterialModule } from '../../shared/material.module';
 
 @NgModule({
-  declarations: [
-    AreaSelectionComponent
-  ],
-  imports: [
-    CommonModule,
-    AreaSelectionRoutingModule,
-    MaterialModule
-  ]
+    imports: [
+        CommonModule,
+        AreaSelectionRoutingModule,
+        MaterialModule,
+        AreaSelectionComponent
+    ]
 })
 export class AreaSelectionModule { }

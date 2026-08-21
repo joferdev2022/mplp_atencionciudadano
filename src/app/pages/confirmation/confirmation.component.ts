@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
-  selector: 'app-confirmation',
-  standalone: false,
-  templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.scss']
+    selector: 'app-confirmation',
+    templateUrl: './confirmation.component.html',
+    styleUrls: ['./confirmation.component.scss'],
+    imports: [MatButton, MatRipple]
 })
 export class ConfirmationComponent {
 

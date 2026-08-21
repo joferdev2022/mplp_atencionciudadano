@@ -5,13 +5,11 @@ import { ConfirmationComponent } from './confirmation.component';
 import { MaterialModule } from '../../shared/material.module';
 
 @NgModule({
-  declarations: [
-    ConfirmationComponent
-  ],
-  imports: [
-    CommonModule,
-    ConfirmationRoutingModule,
-    MaterialModule
-  ]
+    imports: [
+        CommonModule,
+        ConfirmationRoutingModule,
+        MaterialModule,
+        ConfirmationComponent
+    ]
 })
 export class ConfirmationModule { }

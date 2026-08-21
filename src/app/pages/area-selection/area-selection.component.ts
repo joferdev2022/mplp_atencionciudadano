@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatRipple } from '@angular/material/core';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 
 interface Area {
   id: number;
@@ -8,10 +11,10 @@ interface Area {
 }
 
 @Component({
-  selector: 'app-area-selection',
-  standalone: false,
-  templateUrl: './area-selection.component.html',
-  styleUrls: ['./area-selection.component.scss']
+    selector: 'app-area-selection',
+    templateUrl: './area-selection.component.html',
+    styleUrls: ['./area-selection.component.scss'],
+    imports: [MatRipple, MatIcon, MatButton]
 })
 export class AreaSelectionComponent {
 

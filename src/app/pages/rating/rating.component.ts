@@ -4,12 +4,17 @@ import { Location } from '@angular/common';
 import { CalificacionRequest } from '../../models/calificacion-request.model';
 import { CalificacionService } from '../../services/calificacion.service';
 import { CalificacionSessionService } from '../../services/calificacion-session.service';
+import { MatRipple } from '@angular/material/core';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-rating',
-  standalone: false,
-  templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss']
+    selector: 'app-rating',
+    templateUrl: './rating.component.html',
+    styleUrls: ['./rating.component.scss'],
+    imports: [MatRipple, MatIcon, FormsModule, MatButton, MatProgressSpinner]
 })
 export class RatingComponent implements OnInit {
 
