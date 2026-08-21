@@ -11,7 +11,7 @@
         src="assets/logo_municipalidad.jpg"
         alt="Escudo Municipalidad Provincial de Leoncio Prado"
         class="header-logo"
-      />
+        />
     </div>
     <span class="header-municipality-name">Municipalidad Provincial Leoncio Prado</span>
   </header>
@@ -24,16 +24,19 @@
 
     <!-- Lista de áreas -->
     <div class="area-list">
-      <button
-        *ngFor="let area of areas"
-        class="area-option"
-        [class.selected]="selectedArea === area"
-        (click)="selectArea(area)"
-        matRipple
-      >
-        <span class="area-option-text">{{ area.nombre }}</span>
-        <mat-icon class="area-check-icon" *ngIf="selectedArea === area">check_circle</mat-icon>
-      </button>
+      @for (area of areas; track area) {
+        <button
+          class="area-option"
+          [class.selected]="selectedArea === area"
+          (click)="selectArea(area)"
+          matRipple
+          >
+          <span class="area-option-text">{{ area.nombre }}</span>
+          @if (selectedArea === area) {
+            <mat-icon class="area-check-icon">check_circle</mat-icon>
+          }
+        </button>
+      }
     </div>
   </main>
 
@@ -45,7 +48,7 @@
       [disabled]="!selectedArea"
       (click)="onSiguiente()"
       matRipple
-    >
+      >
       Siguiente
     </button>
   </footer>
