@@ -19,8 +19,6 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-
-# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -40,3 +38,16 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Python / extractor TUSNE
+/.venv/
+/.pytest_cache/
+__pycache__/
+*.py[cod]
+/output/pages/
+/output/processed/
+/output/debug/
+/output/raw_ocr.json
+/output/extraction.log
+/output/TUSNE_extraido.xlsx
+

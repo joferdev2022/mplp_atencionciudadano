@@ -86,7 +86,7 @@ export class RatingComponent implements OnInit {
       servicio: this.selectedAreaName,
       estrellas: this.selectedRating,
       pregunta1: this.answeredQuestions.resolvioDudas as boolean,
-      pregunta2: this.answeredQuestions.tiempoEspera as boolean,
+      // pregunta2: this.answeredQuestions.tiempoEspera as boolean,
       observacion: this.comment.trim() || undefined
     };
 

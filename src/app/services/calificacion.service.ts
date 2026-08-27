@@ -16,7 +16,7 @@ export class CalificacionService {
       .set('servicio', data.servicio)
       .set('estrellas', data.estrellas.toString())
       .set('pregunta1', data.pregunta1 ? 'SI' : 'NO')
-      .set('pregunta2', data.pregunta2 ? 'SI' : 'NO')
+      // .set('pregunta2', data.pregunta2 ? 'SI' : 'NO')
       .set('observacion', data.observacion ?? '');
 
     const headers = new HttpHeaders({
