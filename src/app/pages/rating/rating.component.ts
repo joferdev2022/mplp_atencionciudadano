@@ -25,9 +25,8 @@ export class RatingComponent implements OnInit {
   selectedAreaName: string = '';
   isSubmitting: boolean = false;
 
-  answeredQuestions: { resolvioDudas: boolean | null; tiempoEspera: boolean | null } = {
+  answeredQuestions: { resolvioDudas: boolean | null } = {
     resolvioDudas: null,
-    tiempoEspera: null
   };
 
   private ratingLabels: { [key: number]: string } = {
@@ -73,7 +72,7 @@ export class RatingComponent implements OnInit {
     return this.ratingLabels[rating] || '';
   }
 
-  answerQuestion(question: 'resolvioDudas' | 'tiempoEspera', value: boolean): void {
+  answerQuestion(question: 'resolvioDudas', value: boolean): void {
     this.answeredQuestions[question] = value;
   }
 
@@ -108,8 +107,7 @@ export class RatingComponent implements OnInit {
   isFormValid(): boolean {
     return this.selectedAreaName.trim().length > 0
       && this.selectedRating > 0
-      && this.answeredQuestions.resolvioDudas !== null
-      && this.answeredQuestions.tiempoEspera !== null;
+      && this.answeredQuestions.resolvioDudas !== null;
   }
 
   private resetForm(): void {
@@ -118,7 +116,6 @@ export class RatingComponent implements OnInit {
     this.comment = '';
     this.answeredQuestions = {
       resolvioDudas: null,
-      tiempoEspera: null
     };
   }
 }
