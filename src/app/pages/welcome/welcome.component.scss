@@ -103,6 +103,15 @@ $max-width-tablet: 768px;
   animation: fadeInUp 0.6s ease-out;
 }
 
+.welcome-kicker {
+  margin: 0 0 10px;
+  color: $color-primary;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
 .welcome-question {
   font-size: 2rem;
   font-weight: 800;
@@ -275,9 +284,177 @@ $max-width-tablet: 768px;
   }
 }
 
+// ============================================
+// Desktop - Composición amplia sin alterar móvil
+// ============================================
+@media (min-width: 900px) {
+  .welcome-container {
+    max-width: 1180px;
+    height: calc(100dvh - var(--page-h));
+    min-height: calc(100dvh - var(--page-h));
+    border: 1px solid #dfe7df;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 22px 60px rgba(34, 66, 39, 0.12);
+  }
+
+  .welcome-header {
+    padding: 20px 50px;
+  }
+
+  .header-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .header-title {
+    font-size: 1.05rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .welcome-main {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr);
+    grid-template-areas:
+      "copy illustration"
+      "action illustration";
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: 28px 76px;
+    padding: 58px 84px;
+    background: linear-gradient(110deg, #fff 0%, #fff 58%, #f5f9f5 58%, #f8fbf8 100%);
+  }
+
+  .welcome-content {
+    grid-area: copy;
+    align-self: end;
+    max-width: 520px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .welcome-kicker {
+    margin-bottom: 16px;
+    font-size: .78rem;
+  }
+
+  .welcome-question {
+    margin-bottom: 20px;
+    font-size: clamp(3rem, 4.5vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+  }
+
+  .welcome-description {
+    font-size: 1.2rem;
+  }
+
+  .welcome-illustration {
+    grid-area: illustration;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    max-height: 560px;
+    justify-self: center;
+  }
+
+  .welcome-illustration::before {
+    content: '';
+    position: absolute;
+    inset: 12% 2% 4%;
+    border-radius: 46% 54% 51% 49% / 48% 42% 58% 52%;
+    background: linear-gradient(145deg, #e4f0e5, #f6faf6);
+  }
+
+  .illustration-image {
+    position: relative;
+    max-height: 540px;
+  }
+
+  .welcome-footer {
+    grid-area: action;
+    align-self: start;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0;
+  }
+
+  .welcome-btn {
+    max-width: 300px;
+  }
+
+  .mobile-break {
+    display: none;
+  }
+}
+
 // Safe area para iPhones con notch
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .welcome-footer {
     padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}
+
+// ============================================
+// Laptop - Escritorio con altura útil reducida
+// ============================================
+@media (min-width: 900px) and (max-height: 820px) {
+  .welcome-container {
+    border-radius: 24px;
+  }
+
+  .welcome-header {
+    padding: 12px 40px;
+  }
+
+  .header-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .header-title {
+    font-size: 0.95rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .welcome-main {
+    grid-template-columns: minmax(0, 1fr) minmax(310px, .75fr);
+    gap: 20px 56px;
+    padding: 34px 64px;
+  }
+
+  .welcome-question {
+    margin-bottom: 14px;
+    font-size: clamp(2.7rem, 3.6vw, 3.5rem);
+    line-height: 1.02;
+  }
+
+  .welcome-description {
+    font-size: 1.05rem;
+  }
+
+  .welcome-illustration {
+    max-width: 350px;
+    max-height: calc(100dvh - 170px);
+  }
+
+  .illustration-image {
+    max-height: calc(100dvh - 190px);
+  }
+
+  .welcome-footer {
+    padding: 0;
+  }
+
+  .welcome-btn {
+    max-width: 280px;
+    height: 52px;
   }
 }

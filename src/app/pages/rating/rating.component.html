@@ -1,6 +1,6 @@
 <div class="rating-container">
   <!-- Botón volver -->
-  <button class="back-button" (click)="goBack()" matRipple aria-label="Volver">
+  <button class="back-button" (click)="goBack()" [disabled]="pendingRequest !== null || isSubmitting" matRipple aria-label="Volver">
     <mat-icon>arrow_back</mat-icon>
   </button>
 
@@ -13,144 +13,152 @@
         class="header-logo"
         />
       </div>
-      <span class="header-municipality-name">Municipalidad Provincial Leoncio Prado</span>
+      <span class="header-municipality-name">Municipalidad Provincial de Leoncio Prado</span>
     </header>
 
     <!-- Contenido principal -->
     <main class="rating-main">
-      <h1 class="rating-title">
-        ¿Cómo calificarías la<br />atención recibida?
-      </h1>
+      <section class="rating-summary">
+        <p class="rating-step">Paso 2 de 2</p>
+        <h1 class="rating-title">
+          ¿Cómo calificarías la<br class="mobile-break" /> atención recibida?
+        </h1>
 
-      <!-- Área seleccionada -->
-      @if (selectedAreaName) {
-        <div class="rating-area-badge">
-          <mat-icon class="badge-icon">business</mat-icon>
-          <span>{{ selectedAreaName }}</span>
-        </div>
-      }
-
-      <!-- Estrellas de calificación -->
-      <div class="rating-stars-section">
-        <div class="stars-container">
-          @for (star of stars; track star) {
-            <button
-              class="star-btn"
-              [class.active]="star <= selectedRating"
-              [class.hover]="star <= hoveredRating && hoveredRating > 0"
-              (click)="selectRating(star)"
-              (mouseenter)="onStarHover(star)"
-              (mouseleave)="onStarLeave()"
-              (touchstart)="selectRating(star)"
-              [attr.aria-label]="star + ' estrella' + (star > 1 ? 's' : '')"
-              >
-              <mat-icon class="star-icon">
-                {{ star <= (hoveredRating || selectedRating) ? 'star' : 'star_border' }}
-              </mat-icon>
-            </button>
-          }
-        </div>
-
-        <!-- Etiqueta de calificación -->
-        <span class="rating-label" [class.visible]="selectedRating > 0">
-          {{ getRatingLabel() }}
-        </span>
-      </div>
-
-      <!-- Preguntas Sí / No -->
-      <div class="yes-no-questions">
-        <div class="question-card">
-          <span class="question-text">¿El personal resolvió tus dudas?</span>
-          <div class="question-options">
-            <button
-              class="option-btn"
-              [class.selected]="answeredQuestions.resolvioDudas === true"
-              (click)="answerQuestion('resolvioDudas', true)"
-              matRipple
-              >
-              <mat-icon class="option-icon">thumb_up</mat-icon>
-              Sí
-            </button>
-            <button
-              class="option-btn option-no"
-              [class.selected]="answeredQuestions.resolvioDudas === false"
-              (click)="answerQuestion('resolvioDudas', false)"
-              matRipple
-              >
-              <mat-icon class="option-icon">thumb_down</mat-icon>
-              No
-            </button>
+        <!-- Área seleccionada -->
+        @if (selectedAreaName) {
+          <div class="rating-area-badge">
+            <mat-icon class="badge-icon">business</mat-icon>
+            <span>{{ selectedAreaName }}</span>
           </div>
-        </div>
-
-        <!-- <div class="question-card">
-          <span class="question-text">¿El tiempo de espera fue aceptable?</span>
-          <div class="question-options">
-            <button
-              class="option-btn"
-              [class.selected]="answeredQuestions.tiempoEspera === true"
-              (click)="answerQuestion('tiempoEspera', true)"
-              matRipple
-              >
-              <mat-icon class="option-icon">thumb_up</mat-icon>
-              Sí
-            </button>
-            <button
-              class="option-btn option-no"
-              [class.selected]="answeredQuestions.tiempoEspera === false"
-              (click)="answerQuestion('tiempoEspera', false)"
-              matRipple
-              >
-              <mat-icon class="option-icon">thumb_down</mat-icon>
-              No
-            </button>
-          </div>
-        </div> -->
-      </div>
-
-      <!-- Campo de comentarios opcional -->
-      <div class="rating-comment-section">
-        <label class="comment-label">
-          Comentarios adicionales
-          <span class="comment-optional">(opcional)</span>
-        </label>
-        <div class="comment-field-wrapper">
-          <textarea
-            class="comment-textarea"
-            [(ngModel)]="comment"
-            placeholder="Cuéntanos más sobre tu experiencia..."
-            rows="4"
-            maxlength="500"
-          ></textarea>
-          <span class="comment-counter">{{ comment.length }}/500</span>
-        </div>
-      </div>
-    </main>
-
-    <!-- Footer con botón Enviar -->
-    <footer class="rating-footer">
-      <button
-        mat-raised-button
-        class="rating-btn-submit"
-        [class.submitting]="isSubmitting"
-        [disabled]="!isFormValid() || isSubmitting"
-        [attr.aria-busy]="isSubmitting"
-        (click)="onEnviar()"
-        >
-        @if (isSubmitting) {
-          <span class="submit-content">
-            <mat-spinner
-              class="submit-spinner"
-              [diameter]="20"
-              aria-hidden="true"
-            ></mat-spinner>
-            <span>Enviando...</span>
-          </span>
-        } @else {
-          Enviar calificación
         }
-      </button>
-    </footer>
+
+        @if (isLoadingArea) {
+          <p class="survey-message" role="status">Comprobando el área...</p>
+        }
+        @if (areaError) {
+          <div class="survey-message survey-message-error" role="alert">
+            <p>{{ areaError }}</p>
+            <button mat-stroked-button (click)="cargarArea()" [disabled]="isLoadingArea">Reintentar carga</button>
+          </div>
+        }
+        @if (pendingRequest && !isSubmitting) {
+          <p class="survey-message" role="status">Hay un envío pendiente de confirmar. Conservamos tus respuestas para reintentarlo sin duplicarlas.</p>
+        }
+        @if (submitError) {
+          <p class="survey-message survey-message-error" role="alert">{{ submitError }}</p>
+        }
+
+        <!-- Estrellas de calificación -->
+        <div class="rating-stars-section">
+          <div class="stars-container">
+            @for (star of stars; track star) {
+              <button
+                class="star-btn"
+                [disabled]="formLocked"
+                [attr.aria-pressed]="star === selectedRating"
+                [class.active]="star <= selectedRating"
+                [class.hover]="star <= hoveredRating && hoveredRating > 0"
+                (click)="selectRating(star)"
+                (mouseenter)="onStarHover(star)"
+                (mouseleave)="onStarLeave()"
+                (touchstart)="selectRating(star)"
+                [attr.aria-label]="star + ' estrella' + (star > 1 ? 's' : '')"
+                >
+                <mat-icon class="star-icon">
+                  {{ star <= (hoveredRating || selectedRating) ? 'star' : 'star_border' }}
+                </mat-icon>
+              </button>
+            }
+          </div>
+
+          <!-- Etiqueta de calificación -->
+          <span class="rating-label" [class.visible]="selectedRating > 0">
+            {{ getRatingLabel() }}
+          </span>
+        </div>
+      </section>
+
+      <section class="rating-form-card" aria-label="Detalles de la calificación">
+        <!-- Preguntas Sí / No -->
+        <div class="yes-no-questions">
+          <div class="question-card">
+            <span class="question-text">¿El personal resolvió tus dudas?</span>
+            <div class="question-options">
+              <button
+                class="option-btn"
+                [disabled]="formLocked || answerLocked"
+                [attr.aria-pressed]="answeredQuestions.resolvioDudas === true"
+                [class.selected]="answeredQuestions.resolvioDudas === true"
+                (click)="answerQuestion('resolvioDudas', true)"
+                matRipple
+                >
+                <mat-icon class="option-icon">thumb_up</mat-icon>
+                Sí
+              </button>
+              <button
+                class="option-btn option-no"
+                [disabled]="formLocked || answerLocked"
+                [attr.aria-pressed]="answeredQuestions.resolvioDudas === false"
+                [class.selected]="answeredQuestions.resolvioDudas === false"
+                (click)="answerQuestion('resolvioDudas', false)"
+                matRipple
+                >
+                <mat-icon class="option-icon">thumb_down</mat-icon>
+                No
+              </button>
+            </div>
+            @if (automaticAnswerText) {
+              <p class="automatic-answer" role="status">{{ automaticAnswerText }}</p>
+            }
+          </div>
+        </div>
+
+        <!-- Campo de comentarios opcional -->
+        <div class="rating-comment-section">
+          <label class="comment-label" for="comentario">
+            Comentarios adicionales
+            <span class="comment-optional">(opcional)</span>
+          </label>
+          <div class="comment-field-wrapper">
+            <textarea
+              class="comment-textarea"
+              id="comentario"
+              [disabled]="formLocked"
+              [(ngModel)]="comment"
+              placeholder="Cuéntanos más sobre tu experiencia..."
+              rows="4"
+              maxlength="500"
+            ></textarea>
+            <span class="comment-counter">{{ comment.length }}/500</span>
+          </div>
+        </div>
+
+        <!-- Footer con botón Enviar -->
+        <footer class="rating-footer">
+          <button
+            mat-raised-button
+            class="rating-btn-submit"
+            [class.submitting]="isSubmitting"
+            [disabled]="!isFormValid() || isSubmitting"
+            [attr.aria-busy]="isSubmitting"
+            (click)="onEnviar()"
+            >
+            @if (isSubmitting) {
+              <span class="submit-content">
+                <mat-spinner
+                  class="submit-spinner"
+                  [diameter]="20"
+                  aria-hidden="true"
+                ></mat-spinner>
+                <span>Enviando...</span>
+              </span>
+            } @else {
+              {{ pendingRequest ? 'Reintentar envío' : 'Enviar calificación' }}
+            }
+          </button>
+        </footer>
+      </section>
+    </main>
   </div>
 
   @if (isSubmitting) {

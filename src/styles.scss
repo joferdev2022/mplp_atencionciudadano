@@ -60,3 +60,65 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(27, 94, 32, 0.5);
 }
+
+/* Estados de la encuesta; conservan la paleta y el diseño del prototipo. */
+.survey-message {
+  padding: 12px 16px;
+  margin: 12px 0;
+  border-radius: 10px;
+  background: #edf6ee;
+  color: #1b5e20;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.survey-message p { margin: 0 0 10px; }
+.survey-message-error { background: #fff0ed; color: #8a2416; }
+button:focus-visible, textarea:focus-visible {
+  outline: 3px solid #1b5e20;
+  outline-offset: 3px;
+}
+button:disabled { cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (min-width: 900px) {
+  body {
+    --page-h: 48px;
+    padding: 24px;
+    background:
+      radial-gradient(circle at 8% 10%, rgba(46, 125, 50, 0.1), transparent 30%),
+      linear-gradient(135deg, #edf3ee 0%, #f5f6f3 55%, #eef1ed 100%);
+  }
+
+  app-welcome,
+  app-area-selection,
+  app-rating,
+  app-confirmation {
+    min-height: calc(100dvh - var(--page-h)) !important;
+  }
+}
+
+/* En laptops con poca altura útil (por ejemplo, 1366×768 o escalado al 125%)
+   recuperamos espacio vertical sin modificar la experiencia móvil. */
+@media (min-width: 900px) and (max-height: 820px) {
+  body {
+    --page-h: 32px;
+    padding: 16px 24px;
+  }
+
+  app-rating .rating-header.rating-header {
+    padding: 12px 64px 10px;
+  }
+
+  app-rating .header-logo-wrapper.header-logo-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+}

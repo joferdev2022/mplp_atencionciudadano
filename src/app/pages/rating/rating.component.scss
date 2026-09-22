@@ -129,6 +129,21 @@ $color-border-light: #E0E0E0;
   overflow-y: auto;
 }
 
+.rating-summary,
+.rating-form-card {
+  min-width: 0;
+}
+
+.rating-step {
+  margin: 0 0 9px;
+  color: $color-primary;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .rating-title {
   font-size: 1.55rem;
   font-weight: 800;
@@ -322,6 +337,17 @@ $color-border-light: #E0E0E0;
   }
 }
 
+.automatic-answer {
+  margin: 0;
+  color: $color-text-secondary;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.option-btn:disabled.selected {
+  opacity: 1;
+}
+
 .option-icon {
   font-size: 20px !important;
   width: 20px !important;
@@ -402,6 +428,7 @@ $color-border-light: #E0E0E0;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
+  margin-top: auto;
   animation: fadeInUp 0.5s ease-out 0.4s both;
 }
 
@@ -652,9 +679,180 @@ $color-border-light: #E0E0E0;
   }
 }
 
+// ============================================
+// Desktop - Formulario centrado y mejor jerarquía
+// ============================================
+@media (min-width: 900px) {
+  .rating-container {
+    max-width: 1180px;
+    height: calc(100dvh - var(--page-h));
+    min-height: calc(100dvh - var(--page-h));
+    border: 1px solid #dfe7df;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 22px 60px rgba(34, 66, 39, 0.12);
+  }
+
+  .back-button {
+    top: 28px;
+    left: 34px;
+  }
+
+  .rating-header {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+    padding: 22px 72px 20px;
+    border-bottom: 1px solid #e4e9e4;
+  }
+
+  .rating-header::before {
+    height: 5px;
+  }
+
+  .header-logo-wrapper {
+    width: 58px;
+    height: 58px;
+    margin: 0;
+  }
+
+  .header-municipality-name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .rating-main {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(360px, .82fr) minmax(480px, 1.18fr);
+    gap: 48px;
+    align-items: center;
+    padding: 44px 64px;
+    overflow-y: auto;
+  }
+
+  .rating-summary {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 470px;
+    padding: 36px;
+    border: 1px solid #dfe9df;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #f2f8f2, #fbfdfb);
+  }
+
+  .rating-step {
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .rating-title {
+    margin-bottom: 18px;
+    font-size: clamp(2rem, 3vw, 2.65rem);
+    line-height: 1.08;
+    text-align: left;
+    letter-spacing: -.045em;
+  }
+
+  .rating-area-badge {
+    align-self: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .rating-stars-section {
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+
+  .stars-container {
+    gap: 6px;
+  }
+
+  .star-icon {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 50px !important;
+  }
+
+  .rating-form-card {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #e0e5e0;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 14px 38px rgba(34, 66, 39, .08);
+  }
+
+  .yes-no-questions {
+    margin-bottom: 24px;
+  }
+
+  .question-card {
+    padding: 0;
+  }
+
+  .comment-textarea {
+    min-height: 120px;
+  }
+
+  .rating-footer {
+    padding: 24px 0 0;
+  }
+
+  .rating-btn-submit {
+    max-width: none;
+  }
+
+  .mobile-break {
+    display: none;
+  }
+}
+
 // Safe area para iPhones con notch
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .rating-footer {
     padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}
+
+// ============================================
+// Laptop - Escritorio con altura útil reducida
+// ============================================
+@media (min-width: 900px) and (max-height: 820px) {
+  .rating-main {
+    gap: 36px;
+    padding: 26px 56px;
+  }
+
+  .rating-title {
+    font-size: 2rem;
+  }
+
+  .rating-summary {
+    min-height: 430px;
+    padding: 28px;
+  }
+
+  .rating-area-badge {
+    margin-bottom: 18px;
+  }
+
+  .star-icon {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 44px !important;
+  }
+
+  .comment-textarea {
+    min-height: 80px;
+  }
+
+  .rating-footer {
+    padding: 18px 0 0;
   }
 }

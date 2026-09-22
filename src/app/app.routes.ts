@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { calificacionConfirmadaGuard } from './guards/calificacion-confirmada.guard';
 
 import { CalificacionEnviadaGuard } from './guards/calificacion-enviada.guard';
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
   },
   {
     path: 'confirmacion',
+    canActivate: [calificacionConfirmadaGuard],
     loadComponent: () =>
       import('./pages/confirmation/confirmation.component').then(
         m => m.ConfirmationComponent

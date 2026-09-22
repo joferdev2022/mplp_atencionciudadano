@@ -89,6 +89,25 @@ $color-text-muted: #388E3C;
   padding: 24px 24px 16px;
 }
 
+.confirmation-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirmation-check {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: #e8f4e9;
+  color: $color-primary;
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
 // ============================================
 // Textos
 // ============================================
@@ -141,6 +160,7 @@ $color-text-muted: #388E3C;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
+  width: 100%;
   animation: fadeInUp 0.5s ease-out 0.7s both;
 }
 
@@ -272,9 +292,151 @@ $color-text-muted: #388E3C;
   }
 }
 
+// ============================================
+// Desktop - Mensaje de cierre en dos columnas
+// ============================================
+@media (min-width: 900px) {
+  .confirmation-container {
+    max-width: 1040px;
+    height: calc(100dvh - var(--page-h));
+    min-height: calc(100dvh - var(--page-h));
+    border: 1px solid #dfe7df;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 22px 60px rgba(34, 66, 39, 0.12);
+  }
+
+  .confirmation-header {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+    padding: 22px 72px 20px;
+    border-bottom: 1px solid #e4e9e4;
+  }
+
+  .confirmation-header::before {
+    height: 5px;
+  }
+
+  .header-logo-wrapper {
+    width: 58px;
+    height: 58px;
+    margin: 0;
+  }
+
+  .header-municipality-name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .confirmation-main {
+    min-height: 0;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: minmax(320px, .9fr) minmax(380px, 1.1fr);
+    column-gap: 72px;
+    align-content: center;
+    padding: 56px 80px;
+  }
+
+  .thanks-illustration-wrapper {
+    position: relative;
+    align-self: center;
+    margin: 0;
+  }
+
+  .thanks-illustration-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 8% 2% 4%;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #e7f2e8, #f7faf7);
+  }
+
+  .thanks-illustration {
+    position: relative;
+    height: clamp(300px, 48vh, 410px);
+  }
+
+  .confirmation-content {
+    align-items: flex-start;
+    padding: 38px;
+    border: 1px solid #e0e8e0;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 14px 38px rgba(34, 66, 39, .08);
+  }
+
+  .confirmation-check {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 24px;
+  }
+
+  .confirmation-title {
+    margin-bottom: 14px;
+    font-size: 2.5rem;
+    text-align: left;
+  }
+
+  .confirmation-message {
+    max-width: 360px;
+    font-size: 1.15rem;
+    text-align: left;
+  }
+
+  .confirmation-footer {
+    justify-content: flex-start;
+    padding: 30px 0 0;
+  }
+
+  .confirmation-btn {
+    max-width: none;
+  }
+}
+
 // Safe area
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .confirmation-footer {
     padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}
+
+// ============================================
+// Laptop - Escritorio con altura útil reducida
+// ============================================
+@media (min-width: 900px) and (max-height: 820px) {
+  .confirmation-container {
+    border-radius: 24px;
+  }
+
+  .confirmation-header {
+    padding: 12px 64px 10px;
+  }
+
+  .header-logo-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .confirmation-main {
+    column-gap: 48px;
+    padding: 28px 64px;
+  }
+
+  .thanks-illustration {
+    height: min(300px, calc(100dvh - 260px));
+  }
+
+  .confirmation-title {
+    font-size: 2.1rem;
+  }
+
+  .confirmation-footer {
+    padding: 24px 0 0;
+  }
+
+  .confirmation-btn {
+    height: 52px;
   }
 }

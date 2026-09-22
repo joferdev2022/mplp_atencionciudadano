@@ -13,43 +13,63 @@
         class="header-logo"
         />
     </div>
-    <span class="header-municipality-name">Municipalidad Provincial Leoncio Prado</span>
+    <span class="header-municipality-name">Municipalidad Provincial de Leoncio Prado</span>
   </header>
 
   <!-- Contenido principal -->
   <main class="area-main">
-    <h1 class="area-title">
-      Selecciona el área que<br />atendió tu solicitud
-    </h1>
+    <section class="area-intro">
+      <p class="area-step">Paso 1 de 2</p>
+      <h1 class="area-title">
+        Selecciona el área que<br class="mobile-break" />atendió tu solicitud
+      </h1>
+      <p class="area-help">Elige una opción para dirigir tu calificación al equipo correcto.</p>
+    </section>
 
-    <!-- Lista de áreas -->
-    <div class="area-list">
-      @for (area of areas; track area) {
-        <button
-          class="area-option"
-          [class.selected]="selectedArea === area"
-          (click)="selectArea(area)"
-          matRipple
-          >
-          <span class="area-option-text">{{ area.nombre }}</span>
-          @if (selectedArea === area) {
-            <mat-icon class="area-check-icon">check_circle</mat-icon>
-          }
-        </button>
+    <section class="area-options-panel" aria-label="Áreas disponibles">
+      @if (isLoading) {
+        <p class="survey-message" role="status">Cargando áreas...</p>
       }
-    </div>
-  </main>
+      @if (errorMessage) {
+        <div class="survey-message survey-message-error" role="alert">
+          <p>{{ errorMessage }}</p>
+          <button mat-stroked-button (click)="cargarAreas()">Reintentar</button>
+        </div>
+      }
+      @if (!isLoading && !errorMessage && areas.length === 0) {
+        <p class="survey-message" role="status">No hay áreas disponibles para calificar en este momento.</p>
+      }
 
-  <!-- Footer con botón Siguiente -->
-  <footer class="area-footer">
-    <button
-      mat-raised-button
-      class="area-btn-next"
-      [disabled]="!selectedArea"
-      (click)="onSiguiente()"
-      matRipple
-      >
-      Siguiente
-    </button>
-  </footer>
+      <!-- Lista de áreas -->
+      <div class="area-list">
+        @for (area of areas; track area.id) {
+          <button
+            class="area-option"
+            [class.selected]="selectedArea === area"
+            [attr.aria-pressed]="selectedArea === area"
+            (click)="selectArea(area)"
+            matRipple
+            >
+            <span class="area-option-text">{{ area.nombre }}</span>
+            @if (selectedArea === area) {
+              <mat-icon class="area-check-icon">check_circle</mat-icon>
+            }
+          </button>
+        }
+      </div>
+    </section>
+
+    <!-- Footer con botón Siguiente -->
+    <footer class="area-footer">
+      <button
+        mat-raised-button
+        class="area-btn-next"
+        [disabled]="!selectedArea || isLoading"
+        (click)="onSiguiente()"
+        matRipple
+        >
+        Siguiente
+      </button>
+    </footer>
+  </main>
 </div>

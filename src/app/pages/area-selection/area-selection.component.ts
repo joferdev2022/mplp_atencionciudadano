@@ -1,40 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatRipple } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
-
-interface Area {
-  id: number;
-  nombre: string;
-}
+import { Area } from '../../models/area.model';
+import { CalificacionService } from '../../services/calificacion.service';
+import { CalificacionSessionService } from '../../services/calificacion-session.service';
 
 @Component({
-    selector: 'app-area-selection',
-    templateUrl: './area-selection.component.html',
-    styleUrls: ['./area-selection.component.scss'],
-    imports: [MatRipple, MatIcon, MatButton]
+  selector: 'app-area-selection',
+  templateUrl: './area-selection.component.html',
+  styleUrls: ['./area-selection.component.scss'],
+  imports: [MatRipple, MatIcon, MatButton]
 })
-export class AreaSelectionComponent {
+export class AreaSelectionComponent implements OnInit {
+  private readonly router = inject(Router);
+  private readonly api = inject(CalificacionService);
+  private readonly session = inject(CalificacionSessionService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  areas: Area[] = [
-    { id: 1, nombre: 'Mesa de Partes' },
-    { id: 2, nombre: 'Administración Tributaria' },
-    { id: 3, nombre: 'Caja' },
-    { id: 4, nombre: 'Transportes' },
-    { id: 5, nombre: 'Infraestructura' },
-  ];
-
+  areas: Area[] = [];
   selectedArea: Area | null = null;
+  isLoading = false;
+  errorMessage = '';
 
-  constructor(
-    private router: Router,
-    private location: Location
-  ) {}
+  ngOnInit(): void {
+    const pendiente = this.session.obtenerPendiente();
+    if (pendiente) {
+      void this.router.navigate(['/calificacion'], {
+        queryParams: { areaId: pendiente.area_id }, replaceUrl: true
+      });
+      return;
+    }
+    this.cargarAreas();
+  }
+
+  cargarAreas(): void {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.selectedArea = null;
+    this.areas = [];
+    this.api.obtenerAreas().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: areas => {
+        this.areas = areas;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+        this.errorMessage = 'No pudimos cargar las áreas. Revisa tu conexión y vuelve a intentarlo.';
+      }
+    });
+  }
 
   goBack(): void {
-    this.location.back();
+    void this.router.navigate(['/bienvenida']);
   }
 
   selectArea(area: Area): void {
@@ -42,9 +63,9 @@ export class AreaSelectionComponent {
   }
 
   onSiguiente(): void {
-    if (this.selectedArea) {
-      this.router.navigate(['/calificacion'], {
-        queryParams: { area: this.selectedArea.nombre }
+    if (this.selectedArea && !this.isLoading) {
+      void this.router.navigate(['/calificacion'], {
+        queryParams: { areaId: this.selectedArea.id }
       });
     }
   }

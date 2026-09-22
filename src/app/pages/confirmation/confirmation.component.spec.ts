@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ConfirmationComponent } from './confirmation.component';
 
@@ -8,7 +9,8 @@ describe('ConfirmationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [ConfirmationComponent]
+    imports: [ConfirmationComponent],
+    providers: [provideRouter([])]
 });
     fixture = TestBed.createComponent(ConfirmationComponent);
     component = fixture.componentInstance;

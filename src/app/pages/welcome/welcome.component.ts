@@ -19,6 +19,9 @@ export class WelcomeComponent {
 
   onComenzar(): void {
     this.calificacionSession.limpiar();
-    this.router.navigate(['/seleccion-area']);
+    const pendiente = this.calificacionSession.obtenerPendiente();
+    this.router.navigate(pendiente ? ['/calificacion'] : ['/seleccion-area'], {
+      queryParams: pendiente ? { areaId: pendiente.area_id } : undefined
+    });
   }
 }

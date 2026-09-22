@@ -8,7 +8,7 @@
         class="header-logo"
       />
       <div class="header-text">
-        <span class="header-title">Municipalidad Provincial</span>
+        <span class="header-title">Municipalidad Provincial de</span>
         <span class="header-subtitle">LEONCIO PRADO</span>
       </div>
     </div>
@@ -17,8 +17,9 @@
   <!-- Contenido principal -->
   <main class="welcome-main">
     <div class="welcome-content">
+      <p class="welcome-kicker">Encuesta de atención ciudadana</p>
       <h1 class="welcome-question">
-        ¿Cómo fue tu<br />experiencia hoy?
+        ¿Cómo fue tu <br class="mobile-break" />experiencia hoy?
       </h1>
       <p class="welcome-description">Tu opinión nos ayuda a mejorar</p>
     </div>
@@ -31,17 +32,17 @@
         class="illustration-image"
       />
     </div>
-  </main>
 
-  <!-- Botón de acción -->
-  <footer class="welcome-footer">
-    <button
-      mat-raised-button
-      class="welcome-btn"
-      (click)="onComenzar()"
-      matRipple
-    >
-      Comenzar
-    </button>
-  </footer>
+    <!-- Botón de acción -->
+    <footer class="welcome-footer">
+      <button
+        mat-raised-button
+        class="welcome-btn"
+        (click)="onComenzar()"
+        matRipple
+      >
+        Comenzar
+      </button>
+    </footer>
+  </main>
 </div>

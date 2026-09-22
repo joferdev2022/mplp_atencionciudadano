@@ -51,3 +51,7 @@ __pycache__/
 /output/extraction.log
 /output/TUSNE_extraido.xlsx
 
+
+# Resultados de pruebas de navegador
+/test-results/
+/playwright-report/

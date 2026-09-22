@@ -1,31 +1,22 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable, timeout } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { CalificacionRequest } from '../models/calificacion-request.model';
+import { Area } from '../models/area.model';
+import { CalificacionRequest, CalificacionResponse } from '../models/calificacion-request.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CalificacionService {
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
 
-  registrarCalificacion(data: CalificacionRequest): Observable<string> {
-    const body = new HttpParams()
-      .set('servicio', data.servicio)
-      .set('estrellas', data.estrellas.toString())
-      .set('pregunta1', data.pregunta1 ? 'SI' : 'NO')
-      // .set('pregunta2', data.pregunta2 ? 'SI' : 'NO')
-      .set('observacion', data.observacion ?? '');
+  obtenerAreas(): Observable<Area[]> {
+    return this.http.get<Area[]>(environment.apiUrl + '/areas').pipe(timeout(15000));
+  }
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-
-    return this.http.post(environment.calificacionesApiUrl, body.toString(), {
-      headers,
-      responseType: 'text'
-    });
+  registrarCalificacion(data: CalificacionRequest): Observable<CalificacionResponse> {
+    return this.http.post<CalificacionResponse>(
+      environment.apiUrl + '/calificaciones', data
+    ).pipe(timeout(15000));
   }
 }

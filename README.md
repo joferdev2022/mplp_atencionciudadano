@@ -1,118 +1,84 @@
-# Extractor TUSNE: PDF escaneado a Excel
+# Encuesta de atención ciudadana — MPLP
 
-Este repositorio conserva la aplicación Angular existente y añade un extractor Python independiente. Su único alcance es procesar TUSNE.pdf, ejecutar OCR local y crear un Excel auditable; no incluye base de datos, API, RAG ni chatbot.
+Frontend Angular 21.2.21. Conserva el diseño del prototipo y utiliza FastAPI
+y MySQL mediante la ruta relativa `/api/v1/public`. Ya no envía datos a Apps Script.
 
-## Requisitos
+## Ejecutar en desarrollo
 
-- Windows 10 u 11 de 64 bits.
-- Python 3.11 de 64 bits (recomendado).
-- Al menos 4 GB libres para el entorno, los modelos OCR y las imágenes temporales.
-- Conexión a Internet sólo en la primera instalación y descarga de modelos. El procesamiento posterior es local.
-
-Las versiones verificadas son PaddlePaddle 3.3.1 y PaddleOCR 3.7.0. La implementación usa PaddleOCR.predict() y los campos rec_texts, rec_scores y rec_polys de la API 3.x.
-
-## Instalación en Windows
-
-Abra PowerShell en la raíz:
+Primero iniciar el backend en el puerto 8000 siguiendo su README.
+Desde `mplp_atencionciudadano`:
 
 ~~~powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install paddlepaddle==3.3.1 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
-python -m pip install -r requirements.txt
-~~~
-
-El primer OCR descarga los modelos de español/alfabeto latino. Si Hugging Face no está accesible, pruebe:
-
-~~~powershell
-$env:PADDLE_PDX_MODEL_SOURCE = "BOS"
-~~~
-
-No se necesita GPU. Para una GPU compatible, instale la variante de PaddlePaddle correspondiente y use python main.py --device gpu:0.
-
-## Ejecución
-
-Coloque TUSNE.pdf en la raíz y ejecute:
-
-~~~powershell
-python main.py
-~~~
-
-Calibración rápida con páginas 2, 12, 16 y 24:
-
-~~~powershell
-python main.py --sample
-~~~
-
-Selecciones explícitas:
-
-~~~powershell
-python main.py --pages 1-5,12,24
-~~~
-
-## Archivos generados
-
-- output/TUSNE_extraido.xlsx: libro final.
-- output/raw_ocr.json: texto raw, confianza, coordenadas, página, fila y columna.
-- output/extraction.log: progreso, errores por página y totales.
-- output/pages/page_001.png: páginas renderizadas a 300 DPI.
-- output/processed/page_001.png: páginas orientadas con contraste moderado.
-- output/debug/page_001_table.png: región y líneas de tabla detectadas.
-
-Una página defectuosa no cancela el resto. El error queda en el log, el JSON y la hoja revision.
-
-## Hojas del Excel
-
-- servicios: una fila por servicio, con código raw y normalizado.
-- requisitos: lista numerada o literal relacionada por servicio_id.
-- tarifas: una fila por detalle/tarifa; varias tarifas pueden apuntar al mismo servicio.
-- revision: incidencias de confianza, números no convertibles y problemas estructurales.
-- vista_plana: vista que repite denominación y requisitos para cada tarifa.
-
-Los campos precio_raw y porcentaje_uit_raw nunca se sustituyen. Si aparece 28.G0, el valor numérico queda vacío y el registro se marca para revisión.
-
-## Configuración
-
-Las opciones centrales están en tusne_extractor/config.py:
-
-~~~python
-DPI = 300
-DEFAULT_ROTATION = 90  # antihoraria
-OCR_LANGUAGE = "es"
-OCR_MIN_CONFIDENCE = 0.80
-SAVE_DEBUG_IMAGES = True
-~~~
-
-La rotación y el umbral también pueden cambiarse sin editar:
-
-~~~powershell
-python main.py --rotation 90
-python main.py --ocr-min-confidence 0.85
-~~~
-
-## Revisión humana
-
-1. Abra output/TUSNE_extraido.xlsx.
-2. Revise primero la hoja revision, filtrando por página y campo.
-3. Compare valor_detectado con output/pages/page_NNN.png o con el PDF.
-4. Corrija servicios, requisitos o tarifas; vista_plana es sólo una vista.
-5. Revise especialmente códigos, porcentajes y precios con raw pero sin valor numérico.
-
-## Pruebas
-
-~~~powershell
-python -m pytest
-~~~
-
-Las pruebas cubren normalización conservadora, numeración y la relación de varias tarifas con un solo servicio.
-
-## Aplicación Angular existente
-
-La documentación original se conserva en README_ANGULAR.md. El frontend permanece en src/:
-
-~~~powershell
+npm ci
 npm start
-npm test
-npm run build
 ~~~
+
+Abrir `http://localhost:4200`. El proxy `proxy.conf.json` envía `/api/**`
+al backend local. No poner credenciales de MySQL en Angular.
+
+## Flujo actual
+
+Bienvenida → selección de área → calificación → confirmación.
+
+Las áreas se consultan en MySQL. Se utiliza `areaId`, no el nombre, para la
+selección. Este bloque registra el canal como `qr_general`. Los QR por área y la
+identificación de otros enlaces quedan para una etapa posterior.
+
+El primer envío genera un UUID y conserva la solicitud en sessionStorage.
+Ante una respuesta incierta, se bloquea la edición y se permite reintentar el
+mismo contenido. Una recarga o volver al inicio recupera el envío pendiente.
+Solo se muestra la confirmación después de recibir la respuesta correspondiente
+de la API. Los rechazos definitivos permiten corregir la solicitud.
+
+Se requiere almacenamiento temporal del navegador para preparar un envío.
+Esto no identifica a una persona ni impide enviar encuestas nuevas; no sustituye
+los futuros limitadores contra abuso.
+
+## Probar desde un celular en la misma red
+
+~~~powershell
+npm start -- --host 0.0.0.0
+~~~
+
+Abrir `http://IP_LOCAL_DE_LA_PC:4200` desde el celular. FastAPI puede permanecer
+en `127.0.0.1:8000` porque el proxy corre en la PC. Si el firewall bloquea el
+acceso, autorizar únicamente el puerto de desarrollo en la red privada.
+No exponer este servidor de desarrollo a Internet.
+
+El generador de UUID incluye un fallback con crypto.getRandomValues para HTTP
+de red local. El despliegue público deberá utilizar HTTPS.
+
+## Verificaciones
+
+~~~powershell
+npm run build
+$env:CHROME_BIN = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+npm test -- --watch=false --browsers=ChromeHeadless
+~~~
+
+Las pruebas de navegador usan Chrome instalado, FastAPI y MySQL locales.
+Instalar también `requirements-dev.txt` en el backend. Playwright reutiliza los
+servidores de 8000 y 4200 si ya están activos; si no, inicia procesos temporales.
+
+~~~powershell
+$env:MPLP_RUN_E2E = "1"
+npm run test:e2e
+~~~
+
+Se comprueban escritorio y vista móvil: guardado real, pérdida de respuesta
+después del guardado, recarga y reintento sin duplicados, recuperación de la carga
+de áreas y protección de la pantalla de confirmación. Solo se eliminan las
+respuestas con los UUID y comentarios exclusivos de cada prueba.
+
+Las capturas y trazas quedan en `test-results/`, excluido de Git.
+En producción, el servidor web deberá reenviar `/api` a FastAPI y servir
+`index.html` para las rutas de Angular; el proxy de ng serve no forma parte
+del build.
+
+No se modificó el dashboard. Autenticación, permisos y limitadores quedan para
+bloques posteriores; no se incorporó CAPTCHA ni Turnstile.
+
+## Coherencia entre estrellas y dudas
+
+Al elegir 5 estrellas se selecciona **Sí** automáticamente en “¿El personal resolvió tus dudas?” y la pregunta queda bloqueada mientras se mantenga esa puntuación. Con 1 estrella se selecciona **No** del mismo modo. Para 2, 3 o 4 estrellas ambas opciones quedan habilitadas. FastAPI y MySQL validan también la regla para impedir combinaciones contradictorias fuera de la interfaz.
+

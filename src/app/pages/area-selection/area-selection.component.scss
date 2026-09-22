@@ -129,6 +129,31 @@ $color-text-muted: #388E3C;
   overflow-y: auto;
 }
 
+.area-intro {
+  text-align: center;
+}
+
+.area-step {
+  margin: 0 0 9px;
+  color: $color-primary;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.area-help {
+  margin: -12px auto 22px;
+  max-width: 430px;
+  color: $color-text-secondary;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.area-options-panel {
+  min-width: 0;
+}
+
 .area-title {
   font-size: 1.55rem;
   font-weight: 800;
@@ -216,6 +241,7 @@ $color-text-muted: #388E3C;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
+  margin-top: auto;
   animation: fadeInUp 0.5s ease-out 0.3s both;
 }
 
@@ -366,9 +392,186 @@ $color-text-muted: #388E3C;
   }
 }
 
+// ============================================
+// Desktop - Distribución en tarjeta y dos columnas
+// ============================================
+@media (min-width: 900px) {
+  .area-container {
+    max-width: 1180px;
+    height: calc(100dvh - var(--page-h));
+    min-height: calc(100dvh - var(--page-h));
+    border: 1px solid #dfe7df;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 22px 60px rgba(34, 66, 39, 0.12);
+  }
+
+  .back-button {
+    top: 28px;
+    left: 34px;
+  }
+
+  .area-header {
+    flex-direction: row;
+    justify-content: center;
+    gap: 14px;
+    padding: 22px 72px 20px;
+    border-bottom: 1px solid #e4e9e4;
+  }
+
+  .area-header::before {
+    height: 5px;
+  }
+
+  .header-logo-wrapper {
+    width: 58px;
+    height: 58px;
+    margin: 0;
+  }
+
+  .header-municipality-name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .area-main {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(260px, .7fr) minmax(520px, 1.3fr);
+    grid-template-areas:
+      "intro options"
+      "action options";
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: 28px 64px;
+    padding: 52px 72px;
+    overflow-y: auto;
+  }
+
+  .area-intro {
+    grid-area: intro;
+    align-self: end;
+    text-align: left;
+  }
+
+  .area-step {
+    margin-bottom: 14px;
+    font-size: .76rem;
+  }
+
+  .area-title {
+    margin-bottom: 16px;
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    line-height: 1.08;
+    text-align: left;
+    letter-spacing: -.045em;
+  }
+
+  .area-help {
+    margin: 0;
+    max-width: 330px;
+    font-size: .98rem;
+  }
+
+  .area-options-panel {
+    grid-area: options;
+    align-self: center;
+    padding: 26px;
+    border: 1px solid #e0e8e0;
+    border-radius: 22px;
+    background: #f7faf7;
+  }
+
+  .area-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .area-option {
+    min-height: 74px;
+    justify-content: flex-start;
+    padding: 16px 46px 16px 20px;
+    border: 1px solid #e0e5e0;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(34, 66, 39, .04);
+  }
+
+  .area-option:hover {
+    border-color: rgba($color-primary, .35);
+    background: #fff;
+  }
+
+  .area-option-text {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .area-footer {
+    grid-area: action;
+    align-self: start;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+  }
+
+  .area-btn-next {
+    max-width: none;
+  }
+
+  .mobile-break {
+    display: none;
+  }
+}
+
 // Safe area para iPhones con notch
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .area-footer {
     padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  }
+}
+
+// ============================================
+// Laptop - Escritorio con altura útil reducida
+// ============================================
+@media (min-width: 900px) and (max-height: 820px) {
+  .area-container {
+    border-radius: 24px;
+  }
+
+  .back-button {
+    top: 18px;
+  }
+
+  .area-header {
+    padding: 12px 64px 10px;
+  }
+
+  .header-logo-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+
+  .area-main {
+    gap: 18px 48px;
+    padding: 28px 56px;
+  }
+
+  .area-title {
+    margin-bottom: 12px;
+    font-size: 2rem;
+  }
+
+  .area-option {
+    min-height: 56px;
+    padding: 12px 20px;
+  }
+
+  .area-footer {
+    padding: 0;
+  }
+
+  .area-btn-next {
+    height: 52px;
   }
 }
